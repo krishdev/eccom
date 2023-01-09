@@ -30,7 +30,8 @@ exports.get_single_order = async (req, res, next) => {
 };
 
 exports.get_orders = async (req, res, next) => {
-  const { userId } = req.query;
+  let { userId } = req.query;
+  if (!userId) userId = 2;
   getOrders({ userId })
     .then((result) => {
       const { message, data } = result;

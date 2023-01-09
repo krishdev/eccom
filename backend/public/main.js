@@ -2013,7 +2013,7 @@ class OrderHistoryComponent {
         this.user = this._auth.getUser();
     }
     ngOnInit() {
-        this._api.getTypeRequest(`orders/?userId=${this.user.id}`).subscribe((res) => {
+        this._api.getTypeRequest(`orders/?userId=${this.user.id || 2}`).subscribe((res) => {
             console.log(res);
             res.data.forEach((item) => {
                 this._product

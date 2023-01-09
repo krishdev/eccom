@@ -11,12 +11,18 @@ dotenv.config({
 
 // Initialize express app
 const app = express();
+var expressLayouts = require('express-ejs-layouts');
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
 // Middleware
 app.use(cors());
+app.use(expressLayouts);
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Router index
 const indexRouter = require("./routes/index");
@@ -24,7 +30,7 @@ app.use("/", indexRouter);
 
 // Health check
 app.get("/", (req, res) => {
-  res.status(200).send("Health Check");
+  res.render('index');
 });
 
 const PORT = process.env.PORT || 5000;

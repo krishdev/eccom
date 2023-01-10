@@ -24,14 +24,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.set('layout', 'main-layout');
+app.set("layout extractScripts", true);
+
 // Router index
 const indexRouter = require("./routes/index");
 app.use("/", indexRouter);
-
-// Health check
-app.get("/", (req, res) => {
-  res.render('index');
-});
 
 const PORT = process.env.PORT || 5000;
 const ENV = process.env.NODE_ENV || null;

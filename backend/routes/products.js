@@ -22,7 +22,11 @@ router.get("/", async (req, res) => {
         c.title as category FROM products p JOIN categories c ON
             c.id = p.cat_id LIMIT ${startValue}, ${limit}`,
     (err, results) => {
-      if (err) console.log(err);
+      if (err) {
+        res.status(504).send({
+          error: err
+        });
+      }
       else res.json(results);
     }
   );
@@ -36,7 +40,11 @@ router.get("/:productId", async (req, res) => {
         c.title as category FROM products p JOIN categories c ON
             c.id = p.cat_id WHERE p.id = ${productId}`,
     (err, results) => {
-      if (err) console.log(err);
+      if (err) {
+        res.status(504).send({
+          error: err
+        });
+      }
       else res.json(results[0]);
     }
   );
